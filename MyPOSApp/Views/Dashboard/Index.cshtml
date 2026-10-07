@@ -1,0 +1,70 @@
+@model MyPOSApp.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<header class="page-heading">
+    <div>
+        <h1>Dashboard</h1>
+        <p>Ringkasan operasional toko</p>
+    </div>
+    <time datetime="@Model.Date.ToString("yyyy-MM-dd")">@Model.Date.ToString("dddd, dd MMMM yyyy", System.Globalization.CultureInfo.GetCultureInfo("id-ID"))</time>
+</header>
+
+@if (ViewBag.ApiUnavailable == true)
+{
+    <div class="notice notice-error" role="alert">
+        <strong>API tidak dapat dijangkau.</strong>
+        <span>Periksa apakah MyPOSApi berjalan dan alamat <code>Api:BaseUrl</code> sudah benar.</span>
+    </div>
+}
+else if (!Model.DataAvailable)
+{
+    <div class="notice" role="status">
+        <span class="notice-indicator"></span>
+        <div><strong>API POS terhubung</strong><p>Belum ada sumber data transaksi. Ringkasan akan tampil setelah database POS tersambung.</p></div>
+    </div>
+}
+else
+{
+    <section class="metric-list" aria-label="Ringkasan penjualan">
+        <div class="metric"><span>Penjualan hari ini</span><strong>Rp @Model.SalesToday?.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("id-ID"))</strong></div>
+        <div class="metric"><span>Transaksi hari ini</span><strong>@Model.TransactionsToday</strong></div>
+        <div class="metric"><span>Produk stok menipis</span><strong>@Model.LowStockProducts</strong></div>
+        <div class="metric"><span>Rata-rata transaksi</span><strong>Rp @Model.AverageTransaction?.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("id-ID"))</strong></div>
+    </section>
+}
+
+<section class="transactions-section">
+    <div class="section-heading">
+        <div><h2>Transaksi terbaru</h2><p>Transaksi yang tercatat hari ini</p></div>
+    </div>
+
+    @if (Model.RecentTransactions.Count == 0)
+    {
+        <div class="empty-state">
+            @if (ViewBag.ApiUnavailable == true)
+            {
+                <strong>Transaksi belum dapat dimuat</strong>
+                <p>Periksa koneksi API, lalu muat ulang halaman ini.</p>
+            }
+            else
+            {
+                <strong>Belum ada data transaksi</strong>
+                <p>Transaksi terbaru akan muncul di sini setelah sumber data POS terhubung.</p>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="table-scroll"><table class="transaction-table">
+            <thead><tr><th>Nomor transaksi</th><th>Pelanggan</th><th>Waktu</th><th class="numeric">Total</th><th>Status</th></tr></thead>
+            <tbody>
+            @foreach (var transaction in Model.RecentTransactions)
+            {
+                <tr><td>@transaction.Number</td><td>@transaction.Customer</td><td>@transaction.Time</td><td class="numeric">@transaction.Total</td><td>@transaction.Status</td></tr>
+            }
+            </tbody>
+        </table></div>
+    }
+</section>

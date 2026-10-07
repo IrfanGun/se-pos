@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · MyPOS</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyPOSApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="mainSidebar">
+            <a class="brand" asp-controller="Dashboard" asp-action="Index" aria-label="MyPOS, dashboard"><span class="brand-mark">m</span><span class="brand-text">MyPOS</span></a>
+            <nav class="side-nav" aria-label="Navigasi utama">
+                <span class="nav-label">MENU</span>
+                <a class="side-link active" asp-controller="Dashboard" asp-action="Index" aria-current="page" title="Dashboard">
+                    <span class="lucide-icon lucide-layout-dashboard" aria-hidden="true"></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </nav>
+            <div class="sidebar-status @(ViewBag.ApiUnavailable == true ? "status-offline" : "")" title="API @(ViewBag.ApiUnavailable == true ? "tidak terhubung" : "terhubung")">
+                <span class="lucide-icon lucide-network" aria-hidden="true"></span>
+                <span class="status-text"><strong>MyPOS API</strong><small>@(ViewBag.ApiUnavailable == true ? "Tidak terhubung" : "Terhubung")</small></span>
+                <i aria-hidden="true"></i>
+            </div>
+        </aside>
+        <main class="main-column">
+            <header class="topbar">
+                <div class="topbar-leading">
+                    <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Ciutkan sidebar" aria-expanded="true" aria-controls="mainSidebar" title="Ciutkan sidebar">
+                        <span id="sidebarToggleIcon" class="lucide-icon lucide-panel-left-close" aria-hidden="true"></span>
+                    </button>
+                    <span class="breadcrumb">MyPOS <span>/</span> @ViewData["Title"]</span>
+                </div>
+                <div class="topbar-actions"><span class="account-name" title="@User.Identity?.Name">@User.Identity?.Name</span><form asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="logout-button"><span class="lucide-icon lucide-log-out" aria-hidden="true"></span><span>Keluar</span></button></form></div>
+            </header>
+            <div class="main-content">@RenderBody()</div>
+        </main>
+    </div>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

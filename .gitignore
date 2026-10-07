@@ -1,0 +1,50 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Aa]rtifacts/
+[Pp]ublish/
+[Tt]est[Rr]esults/
+
+# Visual Studio / .NET IDE files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# .NET local tooling and generated files
+*.cache
+*.pdb
+*.mdb
+*.prof
+*.coverage
+*.coveragexml
+project.lock.json
+project.fragment.lock.json
+Generated Files/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+secrets.json
+
+# Frontend dependencies and generated assets (if added)
+node_modules/
+coverage/
+dist/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
