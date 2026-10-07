@@ -4,6 +4,7 @@ using MyPOSApi.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton<ApiTokenService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(

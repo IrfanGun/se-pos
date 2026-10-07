@@ -1,0 +1,33 @@
+@model MyPOSApp.Models.ProductFormModel
+@{
+    ViewData["Title"] = "Tambah Produk";
+}
+
+<header class="page-heading">
+    <div>
+        <h1>Tambah produk</h1>
+        <p>Masukkan nama dan harga produk.</p>
+    </div>
+</header>
+
+<section class="transactions-section">
+    <form asp-action="Create" method="post" class="login-form">
+        <div asp-validation-summary="ModelOnly" class="form-error"></div>
+        <label asp-for="Name">Nama produk</label>
+        <input asp-for="Name" autocomplete="off" />
+        <span asp-validation-for="Name" class="field-error"></span>
+
+        <label asp-for="Price">Harga</label>
+        <input asp-for="Price" type="number" min="0.01" step="0.01" />
+        <span asp-validation-for="Price" class="field-error"></span>
+
+        <div class="action-buttons">
+            <button type="submit" class="primary-button">Simpan produk</button>
+            <a asp-action="Index" class="btn btn-secondary">Batal</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

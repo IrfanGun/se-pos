@@ -54,6 +54,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .side-link.active { border-left-color: var(--primary-border); background: #edf7f7; color: #155b60; font-weight: 600; }
 .lucide-icon { display: inline-block; width: 18px; height: 18px; flex: none; background-color: currentColor; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; }
 .lucide-layout-dashboard { -webkit-mask-image: url("/lib/lucide/icons/layout-dashboard.svg"); mask-image: url("/lib/lucide/icons/layout-dashboard.svg"); }
+.lucide-package { -webkit-mask-image: url("/lib/lucide/icons/package.svg"); mask-image: url("/lib/lucide/icons/package.svg"); }
 .lucide-network { -webkit-mask-image: url("/lib/lucide/icons/network.svg"); mask-image: url("/lib/lucide/icons/network.svg"); }
 .lucide-panel-left-close { -webkit-mask-image: url("/lib/lucide/icons/panel-left-close.svg"); mask-image: url("/lib/lucide/icons/panel-left-close.svg"); }
 .lucide-panel-left-open { -webkit-mask-image: url("/lib/lucide/icons/panel-left-open.svg"); mask-image: url("/lib/lucide/icons/panel-left-open.svg"); }

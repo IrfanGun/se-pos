@@ -18,3 +18,5 @@ public sealed record DashboardViewModel(
     IReadOnlyList<TransactionViewModel> RecentTransactions);
 
 public sealed record TransactionViewModel(string Number, string Time, string Customer, string Total, string Status);
+
+public sealed record ApiProductResponse(Guid Id, string Name, decimal Price, DateTime CreatedAt, DateTime UpdatedAt);

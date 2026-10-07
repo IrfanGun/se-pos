@@ -1,0 +1,117 @@
+@model IReadOnlyList<MyPOSApp.Models.ApiProductResponse>
+
+@{
+    ViewData["Title"] = "Produk";
+}
+
+<header class="page-heading">
+    <div>
+        <h1>Produk</h1>
+        <p>Daftar produk toko</p>
+    </div>
+
+    <a asp-controller="Products"
+       asp-action="Create"
+       class="btn btn-primary">
+        + Tambah Produk
+    </a>
+</header>
+
+@if (ViewBag.ApiUnavailable == true)
+{
+    <div class="notice notice-error" role="alert">
+        <strong>Produk tidak dapat dimuat.</strong>
+        <span>
+            Periksa koneksi MyPOSApi dan database,
+            lalu muat ulang halaman.
+        </span>
+    </div>
+}
+else if (TempData["ProductError"] is string productError)
+{
+    <div class="notice notice-error" role="alert">@productError</div>
+}
+else if (Model.Count == 0)
+{
+    <div class="empty-state">
+        <strong>Belum ada produk</strong>
+        <p>Produk yang tersimpan akan muncul di sini.</p>
+
+        <a asp-controller="Products"
+           asp-action="Create"
+           class="btn btn-primary">
+            Tambah Produk
+        </a>
+    </div>
+}
+else
+{
+    <section class="transactions-section">
+        <div class="table-scroll">
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Nama produk</th>
+                        <th class="numeric">Harga</th>
+                        <th>Diperbarui</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+
+                            <td class="numeric">
+                                Rp @product.Price.ToString(
+                                    "N0",
+                                    System.Globalization.CultureInfo
+                                        .GetCultureInfo("id-ID")
+                                )
+                            </td>
+
+                            <td>
+                                @product.UpdatedAt
+                                    .ToLocalTime()
+                                    .ToString(
+                                        "dd MMM yyyy HH:mm",
+                                        System.Globalization.CultureInfo
+                                            .GetCultureInfo("id-ID")
+                                    )
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+
+                                    <a asp-controller="Products"
+                                       asp-action="Edit"
+                                       asp-route-id="@product.Id"
+                                       class="btn btn-secondary">
+                                        Edit
+                                    </a>
+
+                                    <form asp-controller="Products"
+                                          asp-action="Delete"
+                                          asp-route-id="@product.Id"
+                                          method="post"
+                                          onsubmit="return confirm('Hapus produk ini?')">
+
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit"
+                                                class="btn btn-danger">
+                                            Hapus
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+}

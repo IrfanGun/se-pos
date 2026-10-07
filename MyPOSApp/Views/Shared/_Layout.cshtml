@@ -13,9 +13,13 @@
             <a class="brand" asp-controller="Dashboard" asp-action="Index" aria-label="MyPOS, dashboard"><span class="brand-mark">m</span><span class="brand-text">MyPOS</span></a>
             <nav class="side-nav" aria-label="Navigasi utama">
                 <span class="nav-label">MENU</span>
-                <a class="side-link active" asp-controller="Dashboard" asp-action="Index" aria-current="page" title="Dashboard">
+                <a class="side-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "active" : "")" asp-controller="Dashboard" asp-action="Index" aria-current="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "page" : null)" title="Dashboard">
                     <span class="lucide-icon lucide-layout-dashboard" aria-hidden="true"></span>
                     <span class="nav-text">Dashboard</span>
+                </a>
+                <a class="side-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Products" ? "active" : "")" asp-controller="Products" asp-action="Index" aria-current="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Products" ? "page" : null)" title="Produk">
+                    <span class="lucide-icon lucide-package" aria-hidden="true"></span>
+                    <span class="nav-text">Produk</span>
                 </a>
             </nav>
             <div class="sidebar-status @(ViewBag.ApiUnavailable == true ? "status-offline" : "")" title="API @(ViewBag.ApiUnavailable == true ? "tidak terhubung" : "terhubung")">

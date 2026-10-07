@@ -18,20 +18,20 @@ public class ProductsController : ControllerBase
 
     // GET: api/products
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetAll()
+    public async Task<ActionResult<IEnumerable<Product>>> GetAll(CancellationToken cancellationToken)
     {
         var products = await _context.Products
             .OrderByDescending(product => product.Id)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return Ok(products);
     }
 
-    // GET: api/products/1
+    // GET: api/products/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Product>> GetById(int id)
+    public async Task<ActionResult<Product>> GetById(Guid id, CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync([id], cancellationToken);
 
         if (product == null)
         {
@@ -46,14 +46,14 @@ public class ProductsController : ControllerBase
 
     // POST: api/products
     [HttpPost]
-    public async Task<ActionResult<Product>> Create(Product product)
+    public async Task<ActionResult<Product>> Create(Product product, CancellationToken cancellationToken)
     {
         product.CreatedAt = DateTime.UtcNow;
         product.UpdatedAt = DateTime.UtcNow;
 
-        _context.Products.Add(product);
+        await _context.Products.AddAsync(product, cancellationToken);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -62,11 +62,11 @@ public class ProductsController : ControllerBase
         );
     }
 
-    // PUT: api/products/1
+    // PUT: api/products/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Product request)
+    public async Task<IActionResult> Update(Guid id, Product request, CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync([id], cancellationToken);
 
         if (product == null)
         {
@@ -80,16 +80,16 @@ public class ProductsController : ControllerBase
         product.Price = request.Price;
         product.UpdatedAt = DateTime.UtcNow;
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return Ok(product);
     }
 
-    // DELETE: api/products/1
+    // DELETE: api/products/{id}
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync([id], cancellationToken);
 
         if (product == null)
         {
@@ -101,7 +101,7 @@ public class ProductsController : ControllerBase
 
         _context.Products.Remove(product);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return Ok(new
         {
