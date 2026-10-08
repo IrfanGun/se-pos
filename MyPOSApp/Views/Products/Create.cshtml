@@ -13,17 +13,17 @@
 <section class="transactions-section">
     <form asp-action="Create" method="post" class="login-form">
         <div asp-validation-summary="ModelOnly" class="form-error"></div>
-        <label asp-for="Name">Nama produk</label>
-        <input asp-for="Name" autocomplete="off" />
+        <label asp-for="Name" class="form-label">Nama produk</label>
+        <input asp-for="Name" class="form-control" autocomplete="off" />
         <span asp-validation-for="Name" class="field-error"></span>
 
-        <label asp-for="Price">Harga</label>
-        <input asp-for="Price" type="number" min="0.01" step="0.01" />
+        <label asp-for="Price" class="form-label">Harga</label>
+        <input asp-for="Price" class="form-control" type="number" min="0.01" step="0.01" />
         <span asp-validation-for="Price" class="field-error"></span>
 
         <div class="action-buttons">
             <button type="submit" class="primary-button">Simpan produk</button>
-            <a asp-action="Index" class="btn btn-secondary">Batal</a>
+            <a asp-action="Index" class="secondary-button">Batal</a>
         </div>
     </form>
 </section>

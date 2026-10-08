@@ -9,7 +9,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Masuk · MyPOS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/buttons.css" asp-append-version="true" />
 </head>
 <body class="login-page">
     <main class="login-page-content">
@@ -20,15 +22,15 @@
 
             <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post" class="login-form">
                 <div asp-validation-summary="ModelOnly" class="form-error" role="alert"></div>
-                <label asp-for="Username">Email</label>
-                <input asp-for="Username" type="email" autocomplete="username" placeholder="nama@bisnis.com" autofocus />
+                <label asp-for="Username" class="form-label">Email</label>
+                <input asp-for="Username" class="form-control" type="email" autocomplete="username" placeholder="nama@bisnis.com" autofocus />
                 <span asp-validation-for="Username" class="field-error"></span>
 
-                <label asp-for="Password">Password</label>
-                <input asp-for="Password" autocomplete="current-password" placeholder="Masukkan password" />
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control" autocomplete="current-password" placeholder="Masukkan password" />
                 <span asp-validation-for="Password" class="field-error"></span>
 
-                <label class="remember-row"><input asp-for="RememberMe" /><span>Ingat saya di perangkat ini</span></label>
+                <label class="remember-row"><input asp-for="RememberMe" class="form-check-input" /><span class="form-check-label">Ingat saya di perangkat ini</span></label>
                 <button class="primary-button" type="submit">Masuk</button>
             </form>
             <p class="login-help">Masalah saat masuk? Hubungi administrator toko.</p>
