@@ -1,0 +1,30 @@
+@model MyPOSApp.Controllers.UserFormPageViewModel
+@{
+    ViewData["Title"] = Model.IsEdit ? "Edit user" : "Tambah user";
+}
+
+<header class="page-heading"><div><h1>@ViewData["Title"]</h1><p>Atur identitas dan hak akses pengguna.</p></div></header>
+<section class="transactions-section">
+    <form asp-action="@(Model.IsEdit ? "Edit" : "Create")" asp-route-id="@Model.Id" method="post" class="login-form admin-form">
+        <div asp-validation-summary="ModelOnly" class="form-error"></div>
+        <label asp-for="Form.DisplayName" class="form-label">Nama</label>
+        <input asp-for="Form.DisplayName" class="form-control" autocomplete="name" />
+        <span asp-validation-for="Form.DisplayName" class="field-error"></span>
+        <label asp-for="Form.Username" class="form-label">Email</label>
+        <input asp-for="Form.Username" class="form-control" type="email" autocomplete="username" />
+        <span asp-validation-for="Form.Username" class="field-error"></span>
+        <label asp-for="Form.Role" class="form-label">Role</label>
+        <select asp-for="Form.Role" class="form-control">
+            @foreach (var role in Model.Roles) { <option value="@role.Name">@role.Name — @role.Description</option> }
+        </select>
+        <label asp-for="Form.Password" class="form-label">Password @(Model.IsEdit ? "baru (opsional)" : "")</label>
+        <input asp-for="Form.Password" class="form-control" autocomplete="new-password" />
+        <span asp-validation-for="Form.Password" class="field-error"></span>
+        @if (Model.IsEdit)
+        {
+            <label class="remember-row"><input asp-for="Form.IsActive" class="form-check-input" /><span class="form-check-label">User aktif</span></label>
+        }
+        <div class="action-buttons"><button type="submit" class="primary-button">Simpan</button><a asp-action="Index" class="secondary-button">Batal</a></div>
+    </form>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

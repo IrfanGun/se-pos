@@ -1,3 +1,15 @@
+:root {
+    --button-primary: #009FE3;
+    --button-primary-hover: #0086BF;
+    --button-primary-soft: #E6F6FD;
+    --button-secondary: #16324F;
+    --button-tertiary: #14B8A6;
+    --button-success: #16A34A;
+    --button-warning: #F59E0B;
+    --button-danger: #DC2626;
+    --button-info: #0284C7;
+}
+
 .primary-button,
 .secondary-button,
 .edit-button,
@@ -19,42 +31,42 @@
 }
 
 .primary-button {
-    background: #0d6efd;
-    color: #fff;
+    background: var(--button-primary);
+    color: var(--surface);
 }
 
 .primary-button:hover {
-    background: #0b5ed7;
+    background: var(--button-primary-hover);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 -2px 3px rgba(0, 0, 0, .17), 0 3px 5px rgba(0, 0, 0, .16);
 }
 
 .secondary-button {
-    background: #ffc107;
-    color: #212529;
+    background: var(--button-secondary);
+    color: var(--surface);
 }
 
 .secondary-button:hover {
-    background: #ffca2c;
+    background: #10263C;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 3px 5px rgba(0, 0, 0, .12);
 }
 
 .edit-button {
-    background: #198754;
-    color: #fff;
+    background: var(--button-tertiary);
+    color: var(--surface);
 }
 
 .edit-button:hover {
-    background: #157347;
+    background: #0F9D8E;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 -2px 3px rgba(0, 0, 0, .17), 0 3px 5px rgba(0, 0, 0, .16);
 }
 
 .delete-button {
-    background: #dc3545;
-    color: #fff;
+    background: var(--button-danger);
+    color: var(--surface);
 }
 
 .delete-button:hover {
-    background: #bb2d3b;
+    background: #B91C1C;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .34), inset 0 -2px 3px rgba(0, 0, 0, .17), 0 3px 5px rgba(0, 0, 0, .16);
 }
 
@@ -124,6 +136,6 @@
 
 button:focus-visible,
 a:focus-visible {
-    outline: 2px solid rgba(11, 181, 194, .48);
+    outline: 2px solid rgba(0, 159, 227, .42);
     outline-offset: 2px;
 }

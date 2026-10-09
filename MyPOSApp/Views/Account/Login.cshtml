@@ -8,6 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="~/logo.png" />
     <title>Masuk · MyPOS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -15,10 +16,9 @@
 </head>
 <body class="login-page">
     <main class="login-page-content">
-        <a class="brand login-brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">m</span><span>MyPOS</span></a>
+        <a class="brand login-brand" asp-controller="Home" asp-action="Index" aria-label="MyPOS"><img class="brand-logo" src="~/logo.png" alt="" /></a>
         <section class="login-form-wrap">
-            <h1>Masuk</h1>
-            <p class="login-subtitle">Gunakan akun POS Anda untuk melanjutkan.</p>
+            <h1 class="m-auto">Masuk</h1>
 
             <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post" class="login-form">
                 <div asp-validation-summary="ModelOnly" class="form-error" role="alert"></div>
@@ -33,7 +33,6 @@
                 <label class="remember-row"><input asp-for="RememberMe" class="form-check-input" /><span class="form-check-label">Ingat saya di perangkat ini</span></label>
                 <button class="primary-button" type="submit">Masuk</button>
             </form>
-            <p class="login-help">Masalah saat masuk? Hubungi administrator toko.</p>
         </section>
         <footer class="login-footer">MyPOS · Sistem point of sale</footer>
     </main>

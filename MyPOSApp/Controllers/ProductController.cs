@@ -7,7 +7,7 @@ using MyPOSApp.Models;
 
 namespace MyPOSApp.Controllers;
 
-[Authorize]
+[Authorize(Policy = AppPermissions.ProductsRead)]
 public sealed class ProductsController(IHttpClientFactory httpClientFactory) : Controller
 {
     [HttpGet]
@@ -29,9 +29,11 @@ public sealed class ProductsController(IHttpClientFactory httpClientFactory) : C
     }
 
     [HttpGet]
+    [Authorize(Policy = AppPermissions.ProductsWrite)]
     public IActionResult Create() => View(new ProductFormModel());
 
     [HttpPost]
+    [Authorize(Policy = AppPermissions.ProductsWrite)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ProductFormModel model, CancellationToken cancellationToken)
     {
@@ -60,6 +62,7 @@ public sealed class ProductsController(IHttpClientFactory httpClientFactory) : C
     }
 
     [HttpGet]
+    [Authorize(Policy = AppPermissions.ProductsWrite)]
     public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
     {
         try
@@ -89,6 +92,7 @@ public sealed class ProductsController(IHttpClientFactory httpClientFactory) : C
     }
 
     [HttpPost]
+    [Authorize(Policy = AppPermissions.ProductsWrite)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Guid id, ProductFormModel model, CancellationToken cancellationToken)
     {
@@ -123,6 +127,7 @@ public sealed class ProductsController(IHttpClientFactory httpClientFactory) : C
     }
 
     [HttpPost]
+    [Authorize(Policy = AppPermissions.ProductsWrite)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {

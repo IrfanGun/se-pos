@@ -5,9 +5,9 @@
     --text: #202a27;
     --muted: #66736d;
     --border: #dce4e0;
-    --primary: #0bb5c2;
-    --primary-hover: #0fc0cd;
-    --primary-border: #08747d;
+    --primary: #009FE3;
+    --primary-hover: #008dcc;
+    --primary-border: #007db3;
     --success: #24734a;
     --danger: #a53e3e;
 }
@@ -17,17 +17,18 @@ html, body { min-height: 100%; }
 body { margin: 0; background: var(--page); color: var(--text); font: 14px/1.5 "Segoe UI", Arial, sans-serif; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
-input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2px; }
+input:focus-visible { outline: 2px solid rgba(0,159,227,.42); outline-offset: 2px; }
 
-.brand { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 650; }
-.brand-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 7px; background: #e8f5f5; color: #08747d; font-size: 19px; font-weight: 700; }
+.brand { display: inline-flex; align-items: center; justify-content: center; }
+.brand-logo { display: block; width: 52px; height: 52px; flex: none; object-fit: contain; }
 
 /* Login */
 .login-page { display: grid; min-height: 100vh; place-items: start center; background: var(--surface); }
 .login-page-content { display: flex; width: min(100% - 40px, 400px); min-height: 100vh; flex-direction: column; padding: 32px 0 20px; }
-.login-brand { align-self: flex-start; }
+.login-brand { align-self: center; }
+.login-brand .brand-logo { width: 88px; height: 88px; }
 .login-form-wrap { width: 100%; margin: auto 0; padding: 56px 0; }
-.login-form-wrap h1 { margin: 0; font-size: 28px; font-weight: 650; letter-spacing: -.5px; }
+.login-form-wrap h1 { margin: 0; text-align: center; font-size: 28px; font-weight: 650; letter-spacing: -.5px; }
 .login-subtitle { margin: 8px 0 28px; color: var(--muted); font-size: 14px; }
 .login-form { display: grid; gap: 8px; }
 .login-form input::placeholder { color: #8b9690; }
@@ -35,7 +36,7 @@ input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2
 .remember-row .form-check-input { flex: none; margin: 0; }
 .login-help, .login-footer { color: var(--muted); font-size: 12px; }
 .login-help { margin: 20px 0 0; }
-.login-footer { border-top: 1px solid var(--border); padding-top: 14px; }
+.login-footer { border-top: 1px solid var(--border); padding-top: 14px; text-align: center; }
 .form-error { color: var(--danger); font-size: 12px; }
 .form-error ul { margin: 0; padding: 0; list-style: none; }
 .field-error { color: var(--danger); font-size: 12px; }
@@ -46,7 +47,7 @@ input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2
 .side-nav { display: grid; gap: 7px; margin-top: 40px; }
 .nav-label { margin: 0 10px 5px; color: #77847d; font-size: 11px; font-weight: 600; letter-spacing: .5px; }
 .side-link { display: flex; min-height: 40px; align-items: center; gap: 11px; border-left: 3px solid transparent; border-radius: 4px; padding: 8px 10px; color: #4d5a53; font-size: 13px; }
-.side-link.active { border-left-color: var(--primary-border); background: #edf7f7; color: #155b60; font-weight: 600; }
+.side-link.active {  background: #e8f6fc; color: #006a96; font-weight: 600; }
 .lucide-icon { display: inline-block; width: 18px; height: 18px; flex: none; background-color: currentColor; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; }
 .lucide-layout-dashboard { -webkit-mask-image: url("/lib/lucide/icons/layout-dashboard.svg"); mask-image: url("/lib/lucide/icons/layout-dashboard.svg"); }
 .lucide-package { -webkit-mask-image: url("/lib/lucide/icons/package.svg"); mask-image: url("/lib/lucide/icons/package.svg"); }
@@ -54,7 +55,8 @@ input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2
 .lucide-panel-left-close { -webkit-mask-image: url("/lib/lucide/icons/panel-left-close.svg"); mask-image: url("/lib/lucide/icons/panel-left-close.svg"); }
 .lucide-panel-left-open { -webkit-mask-image: url("/lib/lucide/icons/panel-left-open.svg"); mask-image: url("/lib/lucide/icons/panel-left-open.svg"); }
 .lucide-log-out { -webkit-mask-image: url("/lib/lucide/icons/log-out.svg"); mask-image: url("/lib/lucide/icons/log-out.svg"); }
-.side-link.active .lucide-icon { color: #08747d; }
+.lucide-users { -webkit-mask-image: url("/lib/lucide/icons/users.svg"); mask-image: url("/lib/lucide/icons/users.svg"); }
+.side-link.active .lucide-icon { color: var(--primary-border); }
 .sidebar-status .lucide-icon { width: 17px; height: 17px; }
 .sidebar-status { display: flex; align-items: center; gap: 10px; margin-top: auto; border-top: 1px solid var(--border); padding: 16px 7px 0; color: var(--success); }
 .sidebar-status svg { width: 17px; height: 17px; }
@@ -94,6 +96,11 @@ input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2
 .empty-state { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 24px 4px; }
 .empty-state strong { font-size: 13px; font-weight: 600; }
 .empty-state p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.table-subtext { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+.status-pill { display: inline-block; border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 600; }
+.status-active { background: #e8f5ed; color: var(--success); }
+.status-inactive { background: #f5e9e9; color: var(--danger); }
+.admin-form { max-width: 520px; }
 
 @media (max-width: 800px) {
     .sidebar { width: 190px; }
@@ -116,7 +123,7 @@ input:focus-visible { outline: 2px solid rgba(11,181,194,.48); outline-offset: 2
 @media (max-width: 560px) {
     .app-shell { flex-direction: column; }
     .sidebar { position: static; width: 100%; height: 56px; flex-direction: row; align-items: center; justify-content: space-between; border-right: 0; border-bottom: 1px solid var(--border); padding: 0 16px; }
-    .brand-mark { width: 28px; height: 28px; }
+    .brand-logo { width: 44px; height: 44px; }
     .side-nav { display: flex; margin: 0; }
     .nav-label { display: none; }
     .side-link { border: 0; padding: 7px 10px; }

@@ -12,6 +12,7 @@
 
 <section class="transactions-section">
     <form asp-action="Create" method="post" class="login-form">
+        @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="form-error"></div>
         <label asp-for="Name" class="form-label">Nama produk</label>
         <input asp-for="Name" class="form-control" autocomplete="off" />

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="~/logo.png" />
     <title>@ViewData["Title"] · MyPOS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -12,7 +13,7 @@
 <body>
     <div class="app-shell">
         <aside class="sidebar" id="mainSidebar">
-            <a class="brand" asp-controller="Dashboard" asp-action="Index" aria-label="MyPOS, dashboard"><span class="brand-mark">m</span><span class="brand-text">MyPOS</span></a>
+            <a class="brand" asp-controller="Dashboard" asp-action="Index" aria-label="MyPOS, dashboard"><img class="brand-logo" src="~/logo.png" alt="" /></a>
             <nav class="side-nav" aria-label="Navigasi utama">
                 <span class="nav-label">MENU</span>
                 <a class="side-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "active" : "")" asp-controller="Dashboard" asp-action="Index" aria-current="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "page" : null)" title="Dashboard">
@@ -23,6 +24,13 @@
                     <span class="lucide-icon lucide-package" aria-hidden="true"></span>
                     <span class="nav-text">Produk</span>
                 </a>
+                @if (User.HasClaim("permission", MyPOSApp.AppPermissions.UsersRead))
+                {
+                    <a class="side-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Users" ? "active" : "")" asp-controller="Users" asp-action="Index" title="Administrasi user">
+                        <span class="lucide-icon lucide-users" aria-hidden="true"></span>
+                        <span class="nav-text">Administrasi user</span>
+                    </a>
+                }
             </nav>
             <div class="sidebar-status @(ViewBag.ApiUnavailable == true ? "status-offline" : "")" title="API @(ViewBag.ApiUnavailable == true ? "tidak terhubung" : "terhubung")">
                 <span class="lucide-icon lucide-network" aria-hidden="true"></span>

@@ -63,6 +63,8 @@ public sealed class AccountController(IHttpClientFactory httpClientFactory) : Co
                 new(ClaimTypes.Name, login.Username),
                 new("pos_api_token", login.AccessToken)
             };
+            claims.AddRange(login.Roles.Select(role => new Claim(ClaimTypes.Role, role)));
+            claims.AddRange(login.Permissions.Select(permission => new Claim("permission", permission)));
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var properties = new AuthenticationProperties
             {

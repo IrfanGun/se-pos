@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MyPOSApi.Data;
 using MyPOSApi.Models;
@@ -7,6 +8,7 @@ namespace MyPOSApi.Controllers;
 
 [ApiController]
 [Route("api/products")]
+[Authorize(Policy = AuthorizationPolicies.ProductsRead)]
 public class ProductsController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -46,6 +48,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products
     [HttpPost]
+    [Authorize(Policy = AuthorizationPolicies.ProductsWrite)]
     public async Task<ActionResult<Product>> Create(Product product, CancellationToken cancellationToken)
     {
         product.CreatedAt = DateTime.UtcNow;
@@ -64,6 +67,7 @@ public class ProductsController : ControllerBase
 
     // PUT: api/products/{id}
     [HttpPut("{id}")]
+    [Authorize(Policy = AuthorizationPolicies.ProductsWrite)]
     public async Task<IActionResult> Update(Guid id, Product request, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync([id], cancellationToken);
@@ -87,6 +91,7 @@ public class ProductsController : ControllerBase
 
     // DELETE: api/products/{id}
     [HttpDelete("{id}")]
+    [Authorize(Policy = AuthorizationPolicies.ProductsWrite)]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync([id], cancellationToken);

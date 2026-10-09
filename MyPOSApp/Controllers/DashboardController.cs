@@ -8,7 +8,7 @@ using MyPOSApp.Models;
 
 namespace MyPOSApp.Controllers;
 
-[Authorize]
+[Authorize(Policy = AppPermissions.DashboardRead)]
 public sealed class DashboardController(IHttpClientFactory httpClientFactory) : Controller
 {
     [HttpGet]

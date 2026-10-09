@@ -1,0 +1,46 @@
+@model MyPOSApp.Models.UsersPageViewModel
+@{
+    ViewData["Title"] = "Administrasi user";
+}
+
+<header class="page-heading">
+    <div><h1>Administrasi user</h1><p>Kelola akun, role, dan status akses pengguna POS.</p></div>
+    @if (User.HasClaim("permission", MyPOSApp.AppPermissions.UsersManage))
+    {
+        <a asp-action="Create" class="primary-button">+ Tambah user</a>
+    }
+</header>
+
+@if (ViewBag.ApiUnavailable == true)
+{
+    <div class="notice notice-error" role="alert"><strong>User tidak dapat dimuat.</strong><span>Periksa koneksi MyPOSApi dan database.</span></div>
+}
+else if (Model.Users.Count == 0)
+{
+    <div class="empty-state"><strong>Belum ada user</strong><p>User yang terdaftar akan muncul di sini.</p></div>
+}
+else
+{
+    <section class="transactions-section">
+        <div class="table-scroll"><table class="transaction-table user-table">
+            <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Diperbarui</th><th>Aksi</th></tr></thead>
+            <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td><strong>@user.DisplayName</strong><small class="table-subtext">@user.Username</small></td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td><span class="status-pill @(user.IsActive ? "status-active" : "status-inactive")">@(user.IsActive ? "Aktif" : "Nonaktif")</span></td>
+                    <td>@user.UpdatedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm", System.Globalization.CultureInfo.GetCultureInfo("id-ID"))</td>
+                    <td>
+                        @if (User.HasClaim("permission", MyPOSApp.AppPermissions.UsersManage))
+                        {
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="edit-button">Edit</a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table></div>
+    </section>
+}
